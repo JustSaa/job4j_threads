@@ -10,13 +10,12 @@ public class ThreadState {
         );
         first.start();
         second.start();
-        try {
-            first.join();
-            second.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println("Все потоки завершили работу.");
+        while(true) {
+            if (first.getState() == Thread.State.TERMINATED && second.getState() == Thread.State.TERMINATED) {
+                System.out.println("Все потоки завершены.");
+                break;
+            }
+        }
     }
 }
