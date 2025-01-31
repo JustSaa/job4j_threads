@@ -11,7 +11,7 @@ public class ThreadState {
         first.start();
         second.start();
 
-        while(true) {
+        while (true) {
             if (first.getState() == Thread.State.TERMINATED && second.getState() == Thread.State.TERMINATED) {
                 System.out.println("Все потоки завершены.");
                 break;
