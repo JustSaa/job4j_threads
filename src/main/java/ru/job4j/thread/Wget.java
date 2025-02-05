@@ -9,18 +9,20 @@ import java.net.URL;
 public class Wget implements Runnable {
     private final String url;
     private final int speed;
-    private final String fileName;
 
-    public Wget(String url, int speed) throws MalformedURLException {
+    public Wget(String url, int speed) {
         this.url = url;
         this.speed = speed;
-        this.fileName = new URL(url).getPath().substring(url.lastIndexOf('/') + 1);
+    }
+
+    private String extractFileName(String url) throws MalformedURLException {
+        return new URL(url).getPath().substring(url.lastIndexOf('/') + 1);
     }
 
     @Override
     public void run() {
         try (BufferedInputStream in = new BufferedInputStream(new URL(url).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream(fileName)) {
+             FileOutputStream fileOutputStream = new FileOutputStream(extractFileName(url))) {
             byte[] buffer = new byte[1024];
             int bytesRead;
             long startTime = System.currentTimeMillis();
@@ -46,7 +48,7 @@ public class Wget implements Runnable {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException, MalformedURLException {
+    public static void main(String[] args) throws InterruptedException {
         if (args.length < 2) {
             throw new IllegalArgumentException("Usage: java Wget <URL> <speed>");
         }
