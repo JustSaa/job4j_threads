@@ -21,26 +21,22 @@ public class ParallelSearch {
 
         Thread producer = new Thread(
                 () -> {
-                    for (int index = 0; index != 3; index++) {
-                        try {
+                    try {
+                        for (int index = 0; index < 3; index++) {
                             queue.offer(index);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        try {
                             Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } finally {
-                            consumer.interrupt();
                         }
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
                     }
                 }
         );
 
+        consumer.start();
         producer.start();
 
         producer.join();
+        consumer.interrupt();
         consumer.join();
     }
 }
