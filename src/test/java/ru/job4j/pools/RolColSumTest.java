@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RolColSumTest {
 
     @Test
-    public void whenSum_thenCorrect() {
+    public void whenSumThenCorrect() {
         int[][] matrix = {
                 {1, 2, 3},
                 {4, 5, 6},
@@ -25,7 +25,7 @@ public class RolColSumTest {
     }
 
     @Test
-    public void whenAsyncSum_thenCorrect() throws InterruptedException {
+    public void whenAsyncSumThenCorrect() throws InterruptedException {
         int[][] matrix = {
                 {1, 2, 3},
                 {4, 5, 6},
@@ -43,7 +43,7 @@ public class RolColSumTest {
     }
 
     @Test
-    public void whenSingleElementMatrix_thenCorrect() {
+    public void whenSingleElementMatrixThenCorrect() {
         int[][] matrix = {
                 {5}
         };
