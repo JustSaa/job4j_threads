@@ -23,7 +23,7 @@ public class ParallelSearch<T> extends RecursiveTask<Integer> {
     }
 
     private int linearSearch() {
-        for (int i = 0; i < array.length; i++) {
+        for (int i = start; i <= end; i++) {
             if (array[i].equals(target)) {
                 return i;
             }
